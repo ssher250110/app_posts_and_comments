@@ -1,4 +1,4 @@
-from rest_framework.permissions import AllowAny, IsAdminUser
+from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 
 from users.models import User
@@ -17,7 +17,7 @@ class UserViewSet(ModelViewSet):
         if self.action == "create":
             self.permission_classes = [AllowAny]
         elif self.action in ["list", "retrieve"]:
-            self.permission_classes = [IsAdminUser]
+            self.permission_classes = [IsAdminUser | IsAuthenticated]
         elif self.action in ["update", "partial_update"]:
             self.permission_classes = [IsAdminUser | IsUser]
         elif self.action == "destroy":
