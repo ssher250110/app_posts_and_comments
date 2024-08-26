@@ -2,6 +2,8 @@ from rest_framework.serializers import ValidationError
 
 
 class PasswordValidator:
+    """Валидатор проверки поля пароль"""
+
     def __init__(self, field):
         self.field = field
 
@@ -14,6 +16,8 @@ class PasswordValidator:
 
 
 class EmailValidator:
+    """Валидатор проверки поля почта"""
+
     def __init__(self, field):
         self.field = field
 
