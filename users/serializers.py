@@ -1,6 +1,7 @@
 from rest_framework.serializers import ModelSerializer
 
 from users.models import User
+from users.validators import PasswordValidator, EmailValidator
 
 
 class UserSerializers(ModelSerializer):
@@ -10,6 +11,7 @@ class UserSerializers(ModelSerializer):
         model = User
         fields = ["username", "password", "email", "phone", "birth_date"]
         extra_kwargs = {"password": {"write_only": True}}
+        validators = [PasswordValidator(field="password"), EmailValidator(field="email")]
 
     def create(self, validated_data):
         """Сохранение объекта"""
