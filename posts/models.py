@@ -42,7 +42,7 @@ class Comment(models.Model):
         help_text="Укажите автора комментария",
     )
     text = models.TextField(verbose_name="Текст комментария", help_text="Добавьте текст комментария")
-    post = models.ForeignKey("Post", on_delete=models.CASCADE, verbose_name="Пост", help_text="Укажите Пост")
+    post = models.ForeignKey("Post", on_delete=models.CASCADE, verbose_name="Пост", help_text="Укажите Пост", related_name="comments")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата редактирования")
 
