@@ -1,7 +1,9 @@
 from rest_framework.fields import ReadOnlyField
 from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import CharField
 
 from posts.models import Post, Comment
+from posts.validators import validate_forbidden_words, AgeValidator
 
 
 class CommentSerializer(ModelSerializer):
@@ -19,6 +21,7 @@ class PostSerializer(ModelSerializer):
 
     comments = CommentSerializer(many=True, read_only=True)
     author = ReadOnlyField(source="author.username")
+    title = CharField(validators=[validate_forbidden_words])
 
     class Meta:
         model = Post
