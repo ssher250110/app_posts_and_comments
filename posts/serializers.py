@@ -3,7 +3,7 @@ from rest_framework.serializers import ModelSerializer
 from rest_framework.serializers import CharField
 
 from posts.models import Post, Comment
-from posts.validators import validate_forbidden_words, AgeValidator
+from posts.validators import validate_forbidden_words
 
 
 class CommentSerializer(ModelSerializer):

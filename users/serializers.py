@@ -1,8 +1,7 @@
 from rest_framework.serializers import ModelSerializer
 
-from posts.validators import AgeValidator
 from users.models import User
-from users.validators import PasswordValidator, EmailValidator
+from users.validators import PasswordValidator, EmailValidator, AgeValidator
 
 
 class UserSerializers(ModelSerializer):
