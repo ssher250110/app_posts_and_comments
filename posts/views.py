@@ -14,7 +14,7 @@ class PostListCreateAPIView(ListCreateAPIView):
     serializer_class = PostSerializer
 
     def perform_create(self, serializer):
-        """Добавление автора объявления"""
+        """Добавление автора поста"""
 
         serializer.save(author=self.request.user)
 
