@@ -16,8 +16,8 @@ class Post(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete=models.SET_NULL,
         **NULLABLE,
-        verbose_name="Автор объявления",
-        help_text="Укажите автора объявления",
+        verbose_name="Автор Поста",
+        help_text="Укажите автора поста",
     )
 
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
