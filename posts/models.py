@@ -7,7 +7,7 @@ NULLABLE = {"null": True, "blank": True}
 class Post(models.Model):
     """Модель поста"""
 
-    title = models.CharField(max_length=50, verbose_name="Название поста", help_text="Укажите название поста")
+    title = models.CharField(max_length=50, verbose_name="Заголовок поста", help_text="Укажите заголовок поста")
     text = models.TextField(**NULLABLE, verbose_name="Текст поста", help_text="Укажите текст поста")
     image = models.ImageField(
         upload_to="post/image", **NULLABLE, verbose_name="Изображение", help_text="Загрузите изображение"
