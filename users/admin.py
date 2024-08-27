@@ -8,7 +8,7 @@ class UserAdmin(admin.ModelAdmin):
     """Отображение информации о пользователях в админ панели"""
 
     list_display = [
-        "id",
+        "pk",
         "username",
         "email",
         "phone",
