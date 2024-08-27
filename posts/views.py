@@ -1,9 +1,10 @@
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
+from rest_framework.viewsets import ModelViewSet
 
-from posts.models import Post
+from posts.models import Post, Comment
 from posts.permissions import IsAuthor
-from posts.serializers import PostSerializer
+from posts.serializers import PostSerializer, CommentSerializer
 
 
 class PostListCreateAPIView(ListCreateAPIView):
@@ -25,9 +26,33 @@ class PostRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     serializer_class = PostSerializer
 
     def get_permissions(self):
-        """Получение прав доступа по условиях"""
+        """Получение прав доступа по условиям"""
+
         if self.request.method in ["PUT", "PATCH", "DELETE"]:
             self.permission_classes = [IsAdminUser | IsAuthor]
         else:
             self.permission_classes = [IsAuthenticated]
+        return super().get_permissions()
+
+
+class CommentViewSet(ModelViewSet):
+    """Набор связанных представлений модели комментарий"""
+
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+
+    def perform_create(self, serializer):
+        """Добавление автора комментария"""
+
+        serializer.save(author=self.request.user)
+
+    def get_permissions(self):
+        """Получение прав доступа по условиям"""
+
+        if self.action == "create":
+            self.permission_classes = [IsAuthenticated]
+        elif self.action in ["retrieve", "list"]:
+            self.permission_classes = [IsAuthenticated]
+        elif self.action == ["destroy", "update"]:
+            self.permission_classes = [IsAdminUser | IsAuthor]
         return super().get_permissions()
