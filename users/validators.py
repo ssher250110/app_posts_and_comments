@@ -1,3 +1,5 @@
+from datetime import date
+
 from rest_framework.serializers import ValidationError
 
 
@@ -25,3 +27,17 @@ class EmailValidator:
         email: str = user.get(self.field)
         if not email.endswith(("mail.ru", "yandex.ru")):
             raise ValidationError("Разрешены домены: mail.ru, yandex.ru")
+
+
+class AgeValidator:
+    """Валидатор проверки поля возраста автора"""
+
+    def __init__(self, field):
+        self.field = field
+
+    def __call__(self, author):
+        current_year = date.today().year
+        birth_date = dict(author).get(self.field).year
+        delta_years = current_year - birth_date
+        if delta_years < 18:
+            raise ValidationError("Пользователь должен быть не моложе 18 лет")
