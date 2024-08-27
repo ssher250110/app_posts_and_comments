@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -15,34 +14,82 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Post',
+            name="Post",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(help_text='Укажите заголовок поста', max_length=50, verbose_name='Заголовок поста')),
-                ('text', models.TextField(blank=True, help_text='Укажите текст поста', null=True, verbose_name='Текст поста')),
-                ('image', models.ImageField(blank=True, help_text='Загрузите изображение', null=True, upload_to='post/image', verbose_name='Изображение')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='Дата редактирования')),
-                ('author', models.ForeignKey(blank=True, help_text='Укажите автора поста', null=True, on_delete=django.db.models.deletion.SET_NULL, to=settings.AUTH_USER_MODEL, verbose_name='Автор Поста')),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                (
+                    "title",
+                    models.CharField(
+                        help_text="Укажите заголовок поста", max_length=50, verbose_name="Заголовок поста"
+                    ),
+                ),
+                (
+                    "text",
+                    models.TextField(
+                        blank=True, help_text="Укажите текст поста", null=True, verbose_name="Текст поста"
+                    ),
+                ),
+                (
+                    "image",
+                    models.ImageField(
+                        blank=True,
+                        help_text="Загрузите изображение",
+                        null=True,
+                        upload_to="post/image",
+                        verbose_name="Изображение",
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")),
+                ("updated_at", models.DateTimeField(auto_now=True, verbose_name="Дата редактирования")),
+                (
+                    "author",
+                    models.ForeignKey(
+                        blank=True,
+                        help_text="Укажите автора поста",
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        to=settings.AUTH_USER_MODEL,
+                        verbose_name="Автор Поста",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Пост',
-                'verbose_name_plural': 'Посты',
+                "verbose_name": "Пост",
+                "verbose_name_plural": "Посты",
             },
         ),
         migrations.CreateModel(
-            name='Comment',
+            name="Comment",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('text', models.TextField(help_text='Добавьте текст комментария', verbose_name='Текст комментария')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='Дата редактирования')),
-                ('author', models.ForeignKey(blank=True, help_text='Укажите автора комментария', null=True, on_delete=django.db.models.deletion.SET_NULL, to=settings.AUTH_USER_MODEL, verbose_name='Автор комментария')),
-                ('post', models.ForeignKey(help_text='Укажите Пост', on_delete=django.db.models.deletion.CASCADE, related_name='comments', to='posts.post', verbose_name='Пост')),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("text", models.TextField(help_text="Добавьте текст комментария", verbose_name="Текст комментария")),
+                ("created_at", models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")),
+                ("updated_at", models.DateTimeField(auto_now=True, verbose_name="Дата редактирования")),
+                (
+                    "author",
+                    models.ForeignKey(
+                        blank=True,
+                        help_text="Укажите автора комментария",
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        to=settings.AUTH_USER_MODEL,
+                        verbose_name="Автор комментария",
+                    ),
+                ),
+                (
+                    "post",
+                    models.ForeignKey(
+                        help_text="Укажите Пост",
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="comments",
+                        to="posts.post",
+                        verbose_name="Пост",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Комментарий',
-                'verbose_name_plural': 'Комментарии',
+                "verbose_name": "Комментарий",
+                "verbose_name_plural": "Комментарии",
             },
         ),
     ]
